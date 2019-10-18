@@ -29,10 +29,14 @@ class ServerlessPlugin {
   }
 
   resolveEnvFileName(env) {
+    if (process.env.SERVERLESS_DOTENV) {
+      return process.env.SERVERLESS_DOTENV;
+    }
+    
     if (this.config && this.config.path) {
       return this.config.path
     }
-
+    
     let basePath =
       this.config && this.config.basePath ? this.config.basePath : ''
 
